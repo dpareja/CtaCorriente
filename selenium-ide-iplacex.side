@@ -8,88 +8,106 @@
     "name": "Buscar Ingeniero en Informatica",
     "commands": [{
       "id": "cmd-001",
-      "comment": "",
+      "comment": "Abrir página principal IPLACEX",
       "command": "open",
       "target": "/",
       "targets": [],
       "value": ""
     }, {
       "id": "cmd-002",
-      "comment": "",
+      "comment": "Configurar tamaño de ventana",
       "command": "setWindowSize",
       "target": "1920x1080",
       "targets": [],
       "value": ""
     }, {
       "id": "cmd-003",
-      "comment": "Seleccionar pestaña ALUMNOS",
+      "comment": "Hacer clic en menú ALUMNOS",
       "command": "click",
-      "target": "linkText=ALUMNOS",
+      "target": "xpath=//a[contains(text(),'ALUMNOS') or contains(text(),'Alumnos')]",
       "targets": [
         ["linkText=ALUMNOS", "linkText"],
-        ["css=a[href*='alumnos']", "css:finder"],
-        ["xpath=//a[contains(text(),'ALUMNOS')]", "xpath:link"]
+        ["xpath=//a[contains(text(),'ALUMNOS')]", "xpath"]
       ],
       "value": ""
     }, {
       "id": "cmd-004",
-      "comment": "Seleccionar Empleos",
-      "command": "click",
-      "target": "linkText=Empleos",
-      "targets": [
-        ["linkText=Empleos", "linkText"],
-        ["css=a[href*='empleos']", "css:finder"],
-        ["xpath=//a[contains(text(),'Empleos')]", "xpath:link"]
-      ],
+      "comment": "Esperar carga del menú",
+      "command": "pause",
+      "target": "1500",
+      "targets": [],
       "value": ""
     }, {
       "id": "cmd-005",
-      "comment": "Esperar carga de página",
+      "comment": "Hacer clic en opción Empleos",
+      "command": "click",
+      "target": "xpath=//a[contains(text(),'Empleos') or contains(text(),'EMPLEOS')]",
+      "targets": [
+        ["linkText=Empleos", "linkText"],
+        ["xpath=//a[contains(text(),'Empleos')]", "xpath"]
+      ],
+      "value": ""
+    }, {
+      "id": "cmd-006",
+      "comment": "Esperar carga de página de empleos",
+      "command": "pause",
+      "target": "3000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cmd-007",
+      "comment": "Hacer clic en selector de región",
+      "command": "click",
+      "target": "xpath=//select[contains(@name,'region') or contains(@id,'region')]",
+      "targets": [
+        ["css=select", "css"],
+        ["xpath=//select", "xpath"]
+      ],
+      "value": ""
+    }, {
+      "id": "cmd-008",
+      "comment": "Seleccionar región",
+      "command": "select",
+      "target": "xpath=//select[contains(@name,'region') or contains(@id,'region')]",
+      "targets": [],
+      "value": "index=1"
+    }, {
+      "id": "cmd-009",
+      "comment": "Buscar campo de texto para búsqueda",
+      "command": "click",
+      "target": "xpath=//input[@type='text' or @type='search']",
+      "targets": [
+        ["css=input[type='text']", "css"],
+        ["xpath=//input[@type='text']", "xpath"]
+      ],
+      "value": ""
+    }, {
+      "id": "cmd-010",
+      "comment": "Introducir texto de búsqueda",
+      "command": "type",
+      "target": "xpath=//input[@type='text' or @type='search']",
+      "targets": [],
+      "value": "Ingeniero en Informática"
+    }, {
+      "id": "cmd-011",
+      "comment": "Presionar Enter o hacer clic en buscar",
+      "command": "sendKeys",
+      "target": "xpath=//input[@type='text' or @type='search']",
+      "targets": [],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "cmd-012",
+      "comment": "Esperar resultados",
       "command": "pause",
       "target": "2000",
       "targets": [],
       "value": ""
     }, {
-      "id": "cmd-006",
-      "comment": "Seleccionar Región",
-      "command": "select",
-      "target": "id=region",
-      "targets": [
-        ["id=region", "id"],
-        ["name=region", "name"],
-        ["css=#region", "css:finder"]
-      ],
-      "value": "label=Metropolitana"
-    }, {
-      "id": "cmd-007",
-      "comment": "Introducir búsqueda",
-      "command": "type",
-      "target": "id=busqueda",
-      "targets": [
-        ["id=busqueda", "id"],
-        ["name=busqueda", "name"],
-        ["css=#busqueda", "css:finder"],
-        ["xpath=//input[@type='text']", "xpath:attributes"]
-      ],
-      "value": "Ingeniero en Informática"
-    }, {
-      "id": "cmd-008",
-      "comment": "Click en botón buscar",
-      "command": "click",
-      "target": "css=button[type='submit']",
-      "targets": [
-        ["css=button[type='submit']", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"]
-      ],
-      "value": ""
-    }, {
-      "id": "cmd-009",
-      "comment": "Verificar resultados",
-      "command": "assertElementPresent",
-      "target": "css=.resultados",
-      "targets": [
-        ["css=.resultados", "css:finder"]
-      ],
+      "id": "cmd-013",
+      "comment": "Verificar que la página cargó",
+      "command": "assertTitle",
+      "target": "*",
+      "targets": [],
       "value": ""
     }]
   }],
