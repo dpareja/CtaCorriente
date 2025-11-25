@@ -32,6 +32,13 @@ pipeline {
                 }
             }
         }
+        
+        stage('Etapa 4: Deploy a JFrog') {
+            steps {
+                echo 'Subiendo artefacto a JFrog Artifactory...'
+                sh 'mvn deploy -DskipTests'
+            }
+        }
     }
     
     post {
