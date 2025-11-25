@@ -1,0 +1,106 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "version": "2.0",
+  "name": "Prueba IPLACEX Empleos",
+  "url": "https://www.iplacex.cl",
+  "tests": [{
+    "id": "test-001",
+    "name": "Buscar Ingeniero en Informatica",
+    "commands": [{
+      "id": "cmd-001",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cmd-002",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cmd-003",
+      "comment": "Seleccionar pestaña ALUMNOS",
+      "command": "click",
+      "target": "linkText=ALUMNOS",
+      "targets": [
+        ["linkText=ALUMNOS", "linkText"],
+        ["css=a[href*='alumnos']", "css:finder"],
+        ["xpath=//a[contains(text(),'ALUMNOS')]", "xpath:link"]
+      ],
+      "value": ""
+    }, {
+      "id": "cmd-004",
+      "comment": "Seleccionar Empleos",
+      "command": "click",
+      "target": "linkText=Empleos",
+      "targets": [
+        ["linkText=Empleos", "linkText"],
+        ["css=a[href*='empleos']", "css:finder"],
+        ["xpath=//a[contains(text(),'Empleos')]", "xpath:link"]
+      ],
+      "value": ""
+    }, {
+      "id": "cmd-005",
+      "comment": "Esperar carga de página",
+      "command": "pause",
+      "target": "2000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cmd-006",
+      "comment": "Seleccionar Región",
+      "command": "select",
+      "target": "id=region",
+      "targets": [
+        ["id=region", "id"],
+        ["name=region", "name"],
+        ["css=#region", "css:finder"]
+      ],
+      "value": "label=Metropolitana"
+    }, {
+      "id": "cmd-007",
+      "comment": "Introducir búsqueda",
+      "command": "type",
+      "target": "id=busqueda",
+      "targets": [
+        ["id=busqueda", "id"],
+        ["name=busqueda", "name"],
+        ["css=#busqueda", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"]
+      ],
+      "value": "Ingeniero en Informática"
+    }, {
+      "id": "cmd-008",
+      "comment": "Click en botón buscar",
+      "command": "click",
+      "target": "css=button[type='submit']",
+      "targets": [
+        ["css=button[type='submit']", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "cmd-009",
+      "comment": "Verificar resultados",
+      "command": "assertElementPresent",
+      "target": "css=.resultados",
+      "targets": [
+        ["css=.resultados", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "suite-001",
+    "name": "Suite Empleos IPLACEX",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["test-001"]
+  }],
+  "urls": ["https://www.iplacex.cl/"],
+  "plugins": []
+}
