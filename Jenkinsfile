@@ -36,7 +36,9 @@ pipeline {
         stage('Etapa 4: Deploy a JFrog') {
             steps {
                 echo 'Subiendo artefacto a JFrog Artifactory...'
-                sh 'mvn deploy -DskipTests'
+                withCredentials([usernamePassword(credentialsId: 'jfrog-credentials', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASS')]) {
+                    sh 'mvn deploy -DskipTests -s settings.xml -Djfrog.username=$JFROG_USER -Djfrog.password=$JFROG_PASS'
+                }
             }
         }
     }
