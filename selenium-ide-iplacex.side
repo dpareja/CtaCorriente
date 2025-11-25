@@ -24,9 +24,9 @@
       "id": "cmd-003",
       "comment": "",
       "command": "click",
-      "target": "linkText=ALUMNOS",
+      "target": "linkText=Estudiantes",
       "targets": [
-        ["linkText=ALUMNOS", "linkText"],
+        ["linkText=Estudiantes", "linkText"],
         ["css=.menu-item:nth-child(3) > a", "css:finder"]
       ],
       "value": ""
@@ -34,9 +34,9 @@
       "id": "cmd-004",
       "comment": "",
       "command": "click",
-      "target": "linkText=Empleos",
+      "target": "linkText=Portal de Empleos",
       "targets": [
-        ["linkText=Empleos", "linkText"],
+        ["linkText=Portal de Empleos", "linkText"],
         ["css=.submenu-item > a", "css:finder"]
       ],
       "value": ""
