@@ -2,56 +2,54 @@ package com.platinum.steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.es.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class LoginSteps {
-    private boolean seleniumAvailable = false;
-    private String usuario;
-    private String password;
-    private boolean loginExitoso;
+    private WebDriver driver;
 
     @Dado("que el usuario está en la página de login")
     public void queElUsuarioEstaEnLaPaginaDeLogin() {
-        // Verificar si estamos en Jenkins sin Selenium
-        if (System.getenv("JENKINS_HOME") != null) {
-            System.out.println("⚠ Selenium no disponible en Jenkins - usando mock");
-            seleniumAvailable = false;
-            loginExitoso = false;
-        } else {
-            throw new org.junit.AssumptionViolatedException("Selenium requiere chromedriver instalado");
-        }
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-allow-origins=*");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-logging"});
+        driver = new ChromeDriver(options);
+        driver.get("http://192.168.3.100:8881/login");
     }
 
     @Cuando("ingresa el nombre de usuario {string} y password {string}")
     public void ingresaElNombreDeUsuarioYPassword(String usuario, String password) {
-        if (!seleniumAvailable) {
-            this.usuario = usuario;
-            this.password = password;
-            if ("admin".equals(usuario) && "admin123".equals(password)) {
-                loginExitoso = true;
-            }
-        }
+        driver.findElement(By.id("username")).sendKeys(usuario);
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("loginBtn")).click();
     }
 
     @Entonces("el usuario debe ser redirigido al dashboard")
-    public void elUsuarioDebeSerRedirigidoAlDashboard() {
-        if (!seleniumAvailable) {
-            if (!loginExitoso) {
-                throw new AssertionError("Login no fue exitoso");
-            }
+    public void elUsuarioDebeSerRedirigidoAlDashboard() throws InterruptedException {
+        Thread.sleep(1000);
+        if (!driver.getCurrentUrl().contains("dashboard")) {
+            throw new AssertionError("No se redirigió al dashboard");
         }
     }
 
     @Entonces("debe mostrar un mensaje de error")
-    public void debeMostrarUnMensajeDeError() {
-        if (!seleniumAvailable) {
-            if (loginExitoso) {
-                throw new AssertionError("Login fue exitoso cuando debería fallar");
-            }
+    public void debeMostrarUnMensajeDeError() throws InterruptedException {
+        Thread.sleep(1000);
+        if (!driver.getPageSource().contains("Credenciales incorrectas")) {
+            throw new AssertionError("No se mostró mensaje de error");
         }
     }
 
     @After
     public void tearDown() {
-        // Cleanup si es necesario
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

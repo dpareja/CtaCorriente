@@ -13,13 +13,8 @@ public class DatabaseConnectionTest {
             assertNotNull("La conexión no debe ser nula", conn);
             assertTrue("La conexión debe estar activa", !conn.isClosed());
             conn.close();
-            System.out.println("✓ Conexión a BD exitosa");
         } catch (Exception e) {
-            System.out.println("⚠ BD no disponible en este entorno: " + e.getMessage());
-            // No fallar si estamos en Jenkins sin BD
-            if (System.getenv("JENKINS_HOME") == null) {
-                fail("Error al conectar a la base de datos: " + e.getMessage());
-            }
+            fail("Error al conectar a la base de datos: " + e.getMessage());
         }
     }
 }

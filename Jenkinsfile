@@ -9,14 +9,14 @@ pipeline {
         stage('Etapa 1: Preparación del Proyecto') {
             steps {
                 echo 'Integrando repositorio remoto...'
-                git branch: 'main', url: 'https://github.com/<usuario>/CtaCorriente.git'
+                git branch: 'main', url: 'https://github.com/dpareja/CtaCorriente.git'
             }
         }
         
         stage('Etapa 2: Construcción del Proyecto') {
             steps {
                 echo 'Compilando el proyecto...'
-                sh 'mvn clean compile'
+                sh 'mvn clean package -DskipTests'
             }
         }
         
