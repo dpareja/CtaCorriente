@@ -12,7 +12,6 @@ public class LoginSteps {
 
     @Dado("que el usuario está en la página de login")
     public void queElUsuarioEstaEnLaPaginaDeLogin() {
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
