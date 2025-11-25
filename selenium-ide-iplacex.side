@@ -8,112 +8,86 @@
     "name": "Buscar Ingeniero en Informatica",
     "commands": [{
       "id": "cmd-001",
-      "comment": "Abrir página principal IPLACEX",
+      "comment": "",
       "command": "open",
-      "target": "/",
+      "target": "https://www.iplacex.cl/",
       "targets": [],
       "value": ""
     }, {
       "id": "cmd-002",
-      "comment": "Configurar tamaño de ventana",
+      "comment": "",
       "command": "setWindowSize",
-      "target": "1920x1080",
+      "target": "1552x840",
       "targets": [],
       "value": ""
     }, {
       "id": "cmd-003",
-      "comment": "Hacer clic en menú ALUMNOS",
+      "comment": "",
       "command": "click",
-      "target": "xpath=//a[contains(text(),'ALUMNOS') or contains(text(),'Alumnos')]",
+      "target": "linkText=ALUMNOS",
       "targets": [
         ["linkText=ALUMNOS", "linkText"],
-        ["xpath=//a[contains(text(),'ALUMNOS')]", "xpath"]
+        ["css=.menu-item:nth-child(3) > a", "css:finder"]
       ],
       "value": ""
     }, {
       "id": "cmd-004",
-      "comment": "Esperar carga del menú",
-      "command": "pause",
-      "target": "1500",
-      "targets": [],
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Empleos",
+      "targets": [
+        ["linkText=Empleos", "linkText"],
+        ["css=.submenu-item > a", "css:finder"]
+      ],
       "value": ""
     }, {
       "id": "cmd-005",
-      "comment": "Hacer clic en opción Empleos",
+      "comment": "",
       "command": "click",
-      "target": "xpath=//a[contains(text(),'Empleos') or contains(text(),'EMPLEOS')]",
+      "target": "id=region",
       "targets": [
-        ["linkText=Empleos", "linkText"],
-        ["xpath=//a[contains(text(),'Empleos')]", "xpath"]
+        ["id=region", "id"],
+        ["name=region", "name"]
       ],
       "value": ""
     }, {
       "id": "cmd-006",
-      "comment": "Esperar carga de página de empleos",
-      "command": "pause",
-      "target": "3000",
+      "comment": "",
+      "command": "select",
+      "target": "id=region",
       "targets": [],
-      "value": ""
+      "value": "label=Región Metropolitana"
     }, {
       "id": "cmd-007",
-      "comment": "Hacer clic en selector de región",
+      "comment": "",
       "command": "click",
-      "target": "xpath=//select[contains(@name,'region') or contains(@id,'region')]",
+      "target": "id=busqueda",
       "targets": [
-        ["css=select", "css"],
-        ["xpath=//select", "xpath"]
+        ["id=busqueda", "id"],
+        ["name=busqueda", "name"]
       ],
       "value": ""
     }, {
       "id": "cmd-008",
-      "comment": "Seleccionar región",
-      "command": "select",
-      "target": "xpath=//select[contains(@name,'region') or contains(@id,'region')]",
-      "targets": [],
-      "value": "index=1"
-    }, {
-      "id": "cmd-009",
-      "comment": "Buscar campo de texto para búsqueda",
-      "command": "click",
-      "target": "xpath=//input[@type='text' or @type='search']",
-      "targets": [
-        ["css=input[type='text']", "css"],
-        ["xpath=//input[@type='text']", "xpath"]
-      ],
-      "value": ""
-    }, {
-      "id": "cmd-010",
-      "comment": "Introducir texto de búsqueda",
+      "comment": "",
       "command": "type",
-      "target": "xpath=//input[@type='text' or @type='search']",
+      "target": "id=busqueda",
       "targets": [],
       "value": "Ingeniero en Informática"
     }, {
-      "id": "cmd-011",
-      "comment": "Presionar Enter o hacer clic en buscar",
-      "command": "sendKeys",
-      "target": "xpath=//input[@type='text' or @type='search']",
-      "targets": [],
-      "value": "${KEY_ENTER}"
-    }, {
-      "id": "cmd-012",
-      "comment": "Esperar resultados",
-      "command": "pause",
-      "target": "2000",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "cmd-013",
-      "comment": "Verificar que la página cargó",
-      "command": "assertTitle",
-      "target": "*",
-      "targets": [],
+      "id": "cmd-009",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-buscar",
+      "targets": [
+        ["css=.btn-buscar", "css:finder"]
+      ],
       "value": ""
     }]
   }],
   "suites": [{
     "id": "suite-001",
-    "name": "Suite Empleos IPLACEX",
+    "name": "Default Suite",
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
